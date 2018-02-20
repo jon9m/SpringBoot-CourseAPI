@@ -9,15 +9,15 @@ import com.mmks.springboot.model.Topic;
 
 @Service
 public class TopicService {
-	/*private List<Topic> topics = Arrays.asList(  //Not mutable - use ArrayList if need to add
-			new Topic("1", "topic 1", "Cameras"), 
-			new Topic("2", "topic 2", "PCs"),
-			new Topic("3", "topic 3", "Mobile"), 
-			new Topic("4", "topic 4", "Games"),
-			new Topic("5", "topic 5", "Apps"));*/
-	
+	/*
+	 * private List<Topic> topics = Arrays.asList( //Not mutable - use ArrayList if
+	 * need to add new Topic("1", "topic 1", "Cameras"), new Topic("2", "topic 2",
+	 * "PCs"), new Topic("3", "topic 3", "Mobile"), new Topic("4", "topic 4",
+	 * "Games"), new Topic("5", "topic 5", "Apps"));
+	 */
+
 	private List<Topic> topics = new ArrayList<Topic>();
-	
+
 	public TopicService() {
 		topics.add(new Topic("1", "topic 1", "Cameras"));
 		topics.add(new Topic("2", "topic 2", "PCs"));
@@ -38,5 +38,22 @@ public class TopicService {
 
 	public void addTopic(Topic topic) {
 		this.topics.add(topic);
+	}
+
+	public void addTopics(List<Topic> topics2) {
+		this.topics.addAll(topics);
+	}
+
+	public void updateTopic(Topic topic, String topicId) {
+		for(Topic t : topics) {
+			if(t.getId().equals(topicId)) {
+				t.setName(topic.getName());
+				t.setDescription(topic.getDescription());
+			}
+		}
+	}
+
+	public void deleteTopic(String topicId) {
+		topics.removeIf(t -> t.getId().equals(topicId));
 	}
 }

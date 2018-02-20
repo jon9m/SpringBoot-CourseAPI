@@ -29,8 +29,23 @@ public class TopicController {
 		return this.topicService.getTopic(topicId);
 	}
 	
-	@RequestMapping(value = "/topics", method = RequestMethod.POST)
+	@RequestMapping(value = "/topic", method = RequestMethod.POST)
 	public void addTopic(@RequestBody Topic topic) {  //Convert JSON representation of Topic into Topic object
 		this.topicService.addTopic(topic);
+	}
+	
+	@RequestMapping(value = "/topics", method = RequestMethod.POST)
+	public void addTopic(@RequestBody List<Topic> topics) {  //Convert JSON representation of Topic into Topic object
+		this.topicService.addTopics(topics);
+	}
+	
+	@RequestMapping(value = "/topic/{id}", method = RequestMethod.PUT)
+	public void addTopic(@RequestBody Topic topic, @PathVariable(name="id") String topicId) {  //Convert JSON representation of Topic into Topic object
+		this.topicService.updateTopic(topic, topicId);
+	}
+	
+	@RequestMapping(value = "/topic/{id}", method = RequestMethod.DELETE)
+	public void addTopic(@PathVariable(name="id") String topicId) { 
+		this.topicService.deleteTopic(topicId);
 	}
 }
